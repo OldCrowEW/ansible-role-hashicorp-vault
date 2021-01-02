@@ -1,0 +1,42 @@
+---
+# defaults file for ansible-role-hashicorp-vault
+
+# globals
+install_prefix: ""
+prefix_lib: "{{ install_prefix }}/usr/lib"
+sysconfig: "{{ install_prefix }}/etc"
+sysconfig_vault: "{{ sysconfig }}/vault.d"
+unitdir: "{{ install_prefix }}/{{ prefix_lib }}/systemd/system"
+vault_install_dir: "{{ install_prefix}}/opt/vault"
+vault_data_dir: "{{ vault_install_dir }}/data"
+vault_tls_dir: "{{ vault_install_dir }}/tls"
+
+vault_pkg_name: "vault"
+vault_pkg_state: "present"
+
+# vault.hcl
+vault_config: "vault.hcl"
+vault_template: "{{ vault_config }}.j2"
+vault_config_file: "{{ sysconfig_vault }}/{{ vault_config }}"
+vault_config_owner: "vault"
+vault_config_group: "vault"
+vault_config_mode: "644"
+vault_config_ui: "true"
+vault_config_storage: "file"
+vault_config_storage_path: "{{ vault_data_dir }}"
+vault_config_listener: "tcp"
+vault_config_listener_address: "0.0.0.0:8200"
+vault_config_listener_tls_cert_file: "{{ vault_tls_dir }}/tls.crt"
+vault_config_listener_tls_key_file: "{{ vault_tls_dir }}/tls.key"
+
+# vault.system
+vault_systemd_config: "vault.service"
+vault_systemd_config_template: "{{ vault_systemd_config }}.j2"
+vault_systemd_config_file: "{{ unitdir }}/{{ vault_systemd_config }}"
+vault_systemd_config_owner: "root"
+vault_systemd_config_group: "root"
+vault_systemd_config_mode: "644"
+
+vault_service_name: "vault"
+vault_service_state: "started"
+vault_service_enabled: "yes"
