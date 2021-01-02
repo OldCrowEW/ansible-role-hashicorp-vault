@@ -11,8 +11,6 @@ jobs:
           - amazonlinux2
           - centos7
           - centos8
-          - fedora32
-          - fedora33
         python-version: 
           - 3.6
           - 3.7
