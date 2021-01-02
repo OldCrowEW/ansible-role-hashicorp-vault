@@ -1,0 +1,13 @@
+---
+# handlers file for ansible-role-hashicorp-vault
+- name: daemon-reload
+  systemd:
+    daemon_reload: yes
+  notify: vault-restart
+
+- name: vault-restart
+  throttle: 1
+  service:
+    name: "{{ vault_service_name }}"
+    state: "restarted"
+  listen: daemon-reload

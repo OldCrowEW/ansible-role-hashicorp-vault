@@ -1,0 +1,32 @@
+---
+# tasks file for ansible-role-hashicorp-vault
+- name: Ensure Hashicorp Vault is installed
+  yum:
+    name: "{{ vault_pkg_name }}"
+    state: "{{ vault_pkg_state }}"
+
+- name: Write Hashicorp Vault config
+  template:
+    src: "{{ vault_template }}"
+    dest: "{{ vault_config_file }}"
+    owner: "{{ vault_config_owner }}"
+    group: "{{ vault_config_group }}"
+    mode: "{{ vault_config_mode }}"
+  notify: vault-restart
+
+- name: Write Hashicorp Vault Systemd Unit config
+  template:
+    src: "{{ vault_systemd_config_template }}"
+    dest: "{{ vault_systemd_config_file }}"
+    owner: "{{ vault_systemd_config_owner }}"
+    group: "{{ vault_systemd_config_group }}"
+    mode: "{{ vault_systemd_config_mode }}"
+  notify: daemon-reload
+
+- meta: flush_handlers
+
+- name: Ensure Hashicorp Vault is started and enabled
+  service:
+    name: "{{ vault_service_name }}"
+    state: "{{ vault_service_state }}"
+    enabled: "{{ vault_service_enabled }}"
