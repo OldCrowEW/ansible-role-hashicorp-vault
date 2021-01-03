@@ -1,6 +1,8 @@
 # ansible-role-hashicorp-vault
 
-HashiCorp Vault - A tool for managing secrets"
+![Workflow Molecule Badge](https://github.com/OldCrowEW/ansible-role-hashicorp-vault/workflows/Molecule%20Test/badge.svg)
+
+HashiCorp Vault - A tool for managing secrets
 
 This role will install Hashicorp Vault via official package on your favorite RHEL / Debian OS.
 
