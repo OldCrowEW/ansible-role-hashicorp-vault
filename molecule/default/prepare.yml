@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Update Ubuntu Apt cache
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Ubuntu'
+      
+    - name: Ensure gpg-agent is available in testing container
+      apt:
+        name: "gpg-agent"
+        state: "present"
+      when: ansible_distribution == "Ubuntu"
+  

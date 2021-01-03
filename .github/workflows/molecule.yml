@@ -11,6 +11,8 @@ jobs:
           - amazonlinux2
           - centos7
           - centos8
+          - ubuntu1804
+          - ubuntu2004
         python-version: 
           - 3.6
           - 3.7

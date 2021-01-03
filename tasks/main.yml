@@ -1,7 +1,7 @@
 ---
 # tasks file for ansible-role-hashicorp-vault
 - name: Ensure Hashicorp Vault is installed
-  yum:
+  package:
     name: "{{ vault_pkg_name }}"
     state: "{{ vault_pkg_state }}"
 
